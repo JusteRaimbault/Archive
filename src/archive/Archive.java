@@ -17,9 +17,9 @@ import com.itextpdf.text.pdf.PdfReader;
  */
 public class Archive {
 	
-    public static void main(String[] args) throws Exception {
-       
-        String odd = args[0],even=args[1],output=args[2];
+	
+	public static void EOFusion(String[] args) throws Exception{
+       String odd = args[0],even=args[1],output=args[2];
     	
         Document document = new Document();
         PdfCopy copy = new PdfCopy(document, new FileOutputStream(output));
@@ -42,6 +42,34 @@ public class Archive {
         copy.freeReader(readerodd);
         readereven.close();readerodd.close();
         document.close();
+	}
+	
+	
+	public static void copy(String in,String out) throws Exception{
+		Document document = new Document();
+        PdfCopy copy = new PdfCopy(document, new FileOutputStream(out));
+        document.open();
+
+        PdfReader reader = new PdfReader(in);
+        int n = reader.getNumberOfPages();
+        //n1 and n2 are always the same !
+        for (int page = 1; page <= n; page++) {
+            copy.addPage(copy.getImportedPage(reader, page));
+        }
+       
+        copy.freeReader(reader);
+        ;reader.close();
+        document.close();
+	}
+	
+	
+	
+    public static void main(String[] args) throws Exception {
+       
+        //EOFusion();
+    	
+    	
+    	
     }
 
 }
