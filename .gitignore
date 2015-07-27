@@ -1,0 +1,10 @@
+jar-in-jar-loader.zip
+.DS_Store
+bib/archive.jar
+bin
+build
+org
+.project
+.settings
+.classpath
+

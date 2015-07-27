@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--BuidFile for project-->
+
+<project name="archive" default="jar" basedir=".">
+  <description>buildfile</description>
+
+  <!-- set global properties for this build -->
+  <property name="src" location="src/archive"/>
+  <property name="build" location="build"/>
+  <property name="jar.dir" value="/Users/Juste" />
+  <property name="main" value = ""/>
+  <property name="bib" location="bib"/>
+
+
+  <path id="classpath">
+  	  <pathelement location="bib/itextpdf-5.4.0.jar"/>
+  </path>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}/classes"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source " >
+    <javac srcdir="${src}" destdir="${build}/classes" classpathref="classpath"/>
+  </target>
+
+  <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+  	
+  	<jar destfile="${jar.dir}/${ant.project.name}.jar" 
+  	        basedir="build/classes">
+  		<manifest>
+  		                <attribute name="Main-Class" value="archive.Archive"/>
+  		            </manifest>
+  	         <fileset dir="build/classes" includes="**/*.class" />
+  	         <zipgroupfileset dir="${bib}" includes="**/*.jar" />
+  	   </jar>
+  	
+  	
+  	
+    </target>
+
+</project>
